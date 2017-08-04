@@ -301,7 +301,7 @@ TEST(fcntl, falloc_punch) {
   }
 }
 
-/*
+
 TEST(fcntl, open_O_TMPFILE_mode) {
 #if __BIONIC__ // Our glibc is too old for O_TMPFILE.
   TemporaryDir dir;
@@ -319,9 +319,6 @@ TEST(fcntl, open_O_TMPFILE_mode) {
   struct stat sb = {};
   ASSERT_EQ(0, fstat(fd, &sb));
   ASSERT_EQ(perms, (sb.st_mode & ~S_IFMT));
-
-  // On Android if we're not root, we won't be able to create links anyway...
-  if (getuid() != 0) return;
 
   std::string final_path = android::base::StringPrintf("%s/named_now", dir.dirname);
   ASSERT_EQ(0, linkat(AT_FDCWD, android::base::StringPrintf("/proc/self/fd/%d", fd).c_str(),
@@ -344,4 +341,3 @@ TEST(fcntl, open_O_TMPFILE_mode) {
   ASSERT_EQ(0, close(fd));
 #endif
 }
-*/
